@@ -7,22 +7,16 @@ let val = document.getElementById("taskInput");
 
 taskInput.addEventListener("keydown", (event) => {
     if (event.key == "Enter") {
-        // taskListArr.unshift({ id: Date.now(), value: taskInput.value });
-        // console.log(taskListArr);
-        // taskInput.value = "";
-        // // console.log("enter is pressed");
-        addEntry();
+            addEntry();
     }
 });
 
 addBtn.addEventListener("click", () => {
-    taskListArr.unshift({ id: Date.now(), value: taskInput.value });
-    taskInput.value = "";
+    
     addEntry();
-    console.log(taskListArr);
 });
 
-function addEntry(){
+    function addEntry(){
     taskListArr.unshift({ id: Date.now(), value: taskInput.value });
         console.log(taskListArr);
         taskInput.value = "";
@@ -37,7 +31,13 @@ function addEntry(){
 function buttonClickHandler(event) {
     // Get the ID of the clicked button
     var buttonId = event.target.id;
-    
+    var taskIndex = taskListArr.findIndex(task => task.id == buttonId);
+
+        if (taskIndex > -1) {
+            // Remove the task from the array
+            taskListArr.splice(taskIndex, 1);
+        }
+    console.log(buttonId);
 }
 
 // Get all buttons on the page
